@@ -1,7 +1,14 @@
 
 
 const readlineSync = require('readline-sync');
+
 const chalk = require('chalk');
+
+const express = require('express');
+
+const app = express();
+
+const PORT = 3000;
 
 const listaDeTareas = [];
 
@@ -26,6 +33,26 @@ function completarTarea(indicador) {
 
     listaDeTareas[indice].completada = true;
 }
+
+function imprimirTareas() {
+    console.log('Lista de tareas:');
+    for(let i = 0; i < listaDeTareas.length; i++) {
+        const tarea = listaDeTareas[i];
+        if (tarea.completada) {
+            console.log(chalk.green(`✓ ${tarea.indicador} - ${tarea.descripcion}`));
+        } else {
+            console.log(chalk.red(`✗ ${tarea.indicador} - ${tarea.descripcion}`));
+        }
+    }
+} 
+
+app.get('/tasks', (req, res) => {
+    res.json(listaDeTareas);
+});
+
+app.listen(PORT, () => {
+    console.log(`La aplicación está escuchando en el puerto ${PORT}`);
+});
 
 function iniciar() {
     while (true) {
@@ -55,18 +82,5 @@ function iniciar() {
         }
     }
 }
-
-
-function imprimirTareas() {
-    console.log('Lista de tareas:');
-    for(let i = 0; i < listaDeTareas.length; i++) {
-        const tarea = listaDeTareas[i];
-        if (tarea.completada) {
-            console.log(chalk.green(`✓ ${tarea.indicador} - ${tarea.descripcion}`));
-        } else {
-            console.log(chalk.red(`✗ ${tarea.indicador} - ${tarea.descripcion}`));
-        }
-    }
-} 
 
 iniciar();

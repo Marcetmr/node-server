@@ -4,13 +4,18 @@
   "description": "task creating script",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "Marcela Tatiana Martínez",
   "type": "commonjs",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
+    "express": "^4.18.2",
     "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
